@@ -1,20 +1,17 @@
 @mixin btn($bg, $fg, $border)
   display: inline-block
-  background: $bg
+  background: #999999
   color: $fg
-  border: 1px solid $border
+  border: 2px solid $border
   text-decoration: none
   cursor: pointer
   text-transform: uppercase
-  border-radius: 3px
   padding: $s/2 $s
-  cursor: pointer
   text-align: center
   outline: none
   font-family: $action-font
   font-weight: 700
   font-size: 0.8rem
-  cursor: pointer
   line-height: 1.5rem
   white-space: nowrap
   > *
@@ -24,10 +21,13 @@
   @include btn($action-bg, $action-fg, $action-border)
   &:hover
     background-color: $action-hover-bg
-    color: $action-hover-fg
+    // color: $action-hover-fg
     border-color: $action-border
   > span
     font-size: inherit
     font-weight: inherit
     color: inherit
     font-family: inherit
+
+.btn[disabled]
+  opacity: 0.3

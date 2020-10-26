@@ -1,5 +1,5 @@
 <template lang="pug">
-  .job-list
+  .job-list(v-if="jobs")
     ul.header
       li.title Tittle
       li.desc Description
@@ -8,7 +8,7 @@
       li.time Timings
       li.sal salary
       li.actions Actions
-    ul.list(v-if="jobs")
+    ul.list(v-if="jobs.length > 0")
       li(v-for="j, i in jobs", :key="j.id")
         span.title
           strong {{ j.job_title }}
@@ -19,11 +19,11 @@
         span.sal {{ j.job_salary }}
         span.actions
           nav(:ref="`action${j.id}`")
-            i(class="fas fa-edit")   | &nbsp;
-            i(class="fas fa-trash-alt")
+            i(class="fas fa-edit", @click="$emit('select', j, 'edit' )") &nbsp;&nbsp; |  &nbsp;&nbsp;
+            i(class="fas fa-trash-alt", @click="$emit('delete', j)")
     ul.list(v-else)
       li
-        span.name No Jobs found!
+        span.title No Jobs found!
 </template>
 <script>
 import { mapGetters } from 'vuex'
@@ -43,10 +43,11 @@ export default {
   cursor: pointer
   ul.list
     li
+      width: 100%
       @include stack-l
-    &:hover
-      background-color: rgba($neutral, 0.1)
-    border-bottom: 2px solid rgba(#999999, 0.2)
+      border-bottom: 2px solid rgba(#999999, 0.2)
+      &:hover
+        background-color: rgba($neutral, 0.1)
   ul.header
     border-bottom: 1px solid rgba($neutral, 0.2)
     @include stack-l
@@ -57,16 +58,40 @@ export default {
       border: none
   ul.list, ul.header
     .title
-      width: 20rem
+      width: 15rem
       padding: $s
-    .desc, .req, .location
-      width: 20rem
+    .title, .desc, .req
+      white-space: nowrap
       overflow: hidden
       text-overflow: ellipsis
-    .timing
+    .desc, .req,
       width: 20rem
-      padding: 0.5rem
-    .sal, .actions
+      padding: $s
+    .location, .sal, .time
+      width: 15rem
+      padding: $s
+    .actions
+      // justify-content: flex-end
       width: 10rem
-      padding: $s/2
+      padding: $s
+      // margin: 3px
+      // visibility: hidden
+      // z-index: 2
+    // .title
+    //   width: 15rem
+    //   padding: $s
+    //   overflow: hidden
+    //   text-overflow: ellipsis
+    // .desc, .req,
+    //   width: 18rem
+    //   padding: $s
+    //   white-space: nowrap
+    //   overflow: hidden
+    //   text-overflow: ellipsis
+    // .location, .time, .salary
+    //   width: 15rem
+    //   padding: $s
+    // .actions
+    //   width: 10rem
+    //   padding: $s/2
 </style>

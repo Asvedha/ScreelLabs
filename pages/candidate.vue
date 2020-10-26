@@ -1,6 +1,8 @@
 <template lang="pug">
 .candidate
   AppHeader(:title="'Find Jobs'")
+    .actions(slot="actions")
+      nuxt-link.btn(to="/") Logout
   main
     CandidateJobList
   //- h3 {{ jobs }}  

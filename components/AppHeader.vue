@@ -1,6 +1,8 @@
 <template lang="pug">
-  header
-    h3(v-if="title") {{ title }}
+.app-header
+  h3(v-if="title") {{ title }}
+  .actions
+    slot(name="actions")
 </template>
 <script>
 export default {
@@ -13,12 +15,16 @@ export default {
 }
 </script>
 <style lang="sass">
-header
+.app-header
   top: 0px
   width: 100vw
+  height: 70px
+  background-color: #999999
   h3
-    // font-style: italic
+    position: relative
+    top: 20px
     text-align: center
-    padding: 20px
-    background-color: #999999
+  .actions
+    margin-top: -5px
+    margin-right: 30px
 </style>
