@@ -5,21 +5,25 @@
       nuxt-link.btn(to="/") Logout
   main
     CandidateJobList
-  //- h3 {{ jobs }}  
+    ToastNotification(v-if="message && message !== ''")
+      |  {{ message }}
 </template>
 <script>
 import { mapGetters } from 'vuex'
 import CandidateJobList from '~/components/CandidateJobList'
 import AppHeader from '~/components/AppHeader'
+import ToastNotification from '~/components/ToastNotification'
 export default {
   components: {
     // JobList,
     AppHeader,
     CandidateJobList,
+    ToastNotification,
   },
   computed: {
     ...mapGetters({
       jobs: 'jobs/jobs',
+      message: 'jobs/message',
     }),
   },
   mounted() {

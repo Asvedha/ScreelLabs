@@ -6,6 +6,7 @@ const state = () => ({
   jobs: [],
   job: {},
   jobAction: null,
+  message: '',
 })
 
 const getters = {
@@ -17,6 +18,9 @@ const getters = {
   },
   jobAction: (state) => {
     return state.jobAction
+  },
+  message: (state) => {
+    return state.message
   },
 }
 
@@ -47,6 +51,12 @@ const mutations = {
   resetJobs(state, job) {
     const i = _.findIndex(state.jobs, { id: job.id })
     Vue.delete(state.jobs, i)
+  },
+  flashMessage(state, message) {
+    state.message = message
+  },
+  clearMessage(state, message) {
+    state.message = ''
   },
 }
 const actions = {
@@ -105,7 +115,11 @@ const actions = {
     return axios
       .get(`https://main-fastapi.herokuapp.com/jobs/${job.id}/apply`)
       .then((res) => {
-        console.log(res.data)
+        const response = res.data
+        context.commit('flashMessage', response[0])
+        setTimeout(function () {
+          context.commit('clearMessage')
+        }, 3000)
       })
   },
 }

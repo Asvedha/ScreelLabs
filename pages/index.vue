@@ -1,15 +1,15 @@
 <template lang="pug">
 .app
   AppHeader(:title="'Applicant Tracking System'")
-  Index
+  LoginForm
 </template>
 <script>
 import AppHeader from '~/components/AppHeader'
-import Index from '~/components/Index'
+import LoginForm from '~/components/LoginForm'
 export default {
   components: {
     AppHeader,
-    Index,
+    LoginForm,
   },
 }
 </script>

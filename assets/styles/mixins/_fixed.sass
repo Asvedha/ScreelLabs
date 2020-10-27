@@ -5,3 +5,39 @@
   bottom: $bottom
   left: $left
   margin: auto
+
+@mixin fixed-left($top: 0, $right: $top, $bottom: $top, $left: $right)
+  @include fixed($top, $right, $bottom, $left)
+  right: auto
+
+@mixin fixed-right($top: 0, $right: $top, $bottom: $top, $left: $right)
+  @include fixed($top, $right, $bottom, $left)
+  left: auto
+
+@mixin fixed-bottom($top: 0, $right: $top, $bottom: $top, $left: $right)
+  @include fixed($top, $right, $bottom, $left)
+  top: auto
+
+@mixin fixed-bottom-left($top: 0, $right: $top, $bottom: $top, $left: $right)
+  @include fixed($top, $right, $bottom, $left)
+  top: auto
+  right: auto
+
+@mixin fixed-bottom-right($top: 0, $right: $top, $bottom: $top, $left: $right)
+  @include fixed($top, $right, $bottom, $left)
+  top: auto
+  left: auto
+
+@mixin fixed-top($top: 0, $right: $top, $bottom: $top, $left: $right)
+  @include fixed($top, $right, $bottom, $left)
+  bottom: auto
+
+@mixin fixed-top-left($top: 0, $right: $top, $bottom: $top, $left: $right)
+  @include fixed($top, $right, $bottom, $left)
+  bottom: auto
+  right: auto
+
+@mixin fixed-top-bottom($top: 0, $right: $top, $bottom: $top, $left: $right)
+  @include fixed($top, $right, $bottom, $left)
+  bottom: auto
+  left: auto 

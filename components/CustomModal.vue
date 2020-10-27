@@ -37,9 +37,9 @@ export default {
   .dialog
     display: none
     @include fixed
-    z-index: 2000
-    height: 30rem
-    width: 50rem
+    // z-index: 2000
+    height: 40rem
+    width: 45rem
     margin: auto
     padding: 0
     header
