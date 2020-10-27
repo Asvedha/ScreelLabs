@@ -4,11 +4,9 @@
   LoginForm
 </template>
 <script>
-import AppHeader from '~/components/AppHeader'
 import LoginForm from '~/components/LoginForm'
 export default {
   components: {
-    AppHeader,
     LoginForm,
   },
 }

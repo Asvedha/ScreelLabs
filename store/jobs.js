@@ -84,9 +84,16 @@ const actions = {
       .post(`https://main-fastapi.herokuapp.com/jobs/add/`, job)
       .then((res) => {
         context.commit('addJob', res.data)
+        context.commit('flashMessage', 'Job successfully created')
+        setTimeout(function () {
+          context.commit('clearMessage')
+        }, 2000)
       })
       .catch((e) => {
-        console.log(e)
+        context.commit('flashMessage', 'Job does not created !')
+        setTimeout(function () {
+          context.commit('clearMessage')
+        }, 2000)
       })
   },
   putJob(context, job) {
@@ -98,6 +105,16 @@ const actions = {
       .then((res) => {
         context.commit('getJob', res.data)
         context.commit('updateJobs', res.data)
+        context.commit('flashMessage', 'Job Updated successfully')
+        setTimeout(function () {
+          context.commit('clearMessage')
+        }, 2000)
+      })
+      .catch((e) => {
+        context.commit('flashMessage', 'Job does not Updated !')
+        setTimeout(function () {
+          context.commit('clearMessage')
+        }, 2000)
       })
   },
   updateJob(context, job) {
@@ -108,6 +125,16 @@ const actions = {
       .delete(`https://main-fastapi.herokuapp.com/jobs/delete/${job.id}`)
       .then((res) => {
         context.commit('resetJobs', job)
+        context.commit('flashMessage', 'Job deleted Successfully')
+        setTimeout(function () {
+          context.commit('clearMessage')
+        }, 2000)
+      })
+      .catch((e) => {
+        context.commit('flashMessage', 'Job does not deleted')
+        setTimeout(function () {
+          context.commit('clearMessage')
+        }, 2000)
       })
   },
   applyJob(context, job) {
@@ -119,7 +146,7 @@ const actions = {
         context.commit('flashMessage', response[0])
         setTimeout(function () {
           context.commit('clearMessage')
-        }, 3000)
+        }, 4000)
       })
   },
 }

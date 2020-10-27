@@ -23,7 +23,7 @@ export default {
     },
     open() {
       this.isOpen = true
-      // this.$emit('open')
+      this.$emit('open')
     },
     close() {
       this.isOpen = false

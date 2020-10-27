@@ -34,7 +34,7 @@ export default {
   @include distribute
   align-items: flex-start
   padding-top: $s*6
-  margin: auto
+  // margin: auto
   .form
     background-color: $neutral-light
     width: 30rem

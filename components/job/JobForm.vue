@@ -26,11 +26,7 @@ custom-modal(ref="jobModal", @close="$emit('cancel')")
     button.btn(@click="SubmitJob", v-on:keyup.enter="SubmitJob") Save    
 </template>
 <script>
-import CustomModal from '~/components/CustomModal'
 export default {
-  components: {
-    CustomModal,
-  },
   props: {
     job: {
       type: Object,

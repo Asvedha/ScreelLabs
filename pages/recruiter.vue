@@ -10,13 +10,14 @@
         main    
           RecruiterJobList(@select="SelectJob", @delete="deleteJob")
           JobForm(v-if="clonedJob && jobAction === 'edit'", :job="clonedJob", @submit="SaveJob", @cancel="deSelectJob")
+          ToastNotification(v-if="message && message !== ''")
+            |  {{ message }}
 </template>
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
-import RecruiterJobList from '~/components/RecruiterJobList'
-import AppHeader from '~/components/AppHeader'
-import JobForm from '~/components/JobForm'
+import RecruiterJobList from '~/components/job/RecruiterJobList'
+import JobForm from '~/components/job/JobForm'
 
 const newJob = {
   job_title: '',
@@ -29,9 +30,7 @@ const newJob = {
 export default {
   components: {
     JobForm,
-    AppHeader,
     RecruiterJobList,
-    // ToastNotification,
   },
   data() {
     return {
@@ -43,6 +42,7 @@ export default {
       jobs: 'jobs/jobs',
       job: 'jobs/job',
       jobAction: 'jobs/jobAction',
+      message: 'jobs/message',
     }),
   },
   watch: {

@@ -10,15 +10,12 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import CandidateJobList from '~/components/CandidateJobList'
-import AppHeader from '~/components/AppHeader'
-import ToastNotification from '~/components/ToastNotification'
+import CandidateJobList from '~/components/job/CandidateJobList'
+// import ToastNotification from '~/components/common/ToastNotification'
 export default {
   components: {
-    // JobList,
-    AppHeader,
     CandidateJobList,
-    ToastNotification,
+    // ToastNotification,
   },
   computed: {
     ...mapGetters({
