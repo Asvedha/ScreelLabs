@@ -12,11 +12,12 @@
       li(v-for="j, i in jobs", :key="j.id")
         span.title
           strong {{ j.job_title }}
-        span.desc {{ j.job_description }}
-        span.req {{ j.job_requirements }}
+        span.desc(:title="j.job_description") {{ j.job_description }}
+        span.req(:title="j.job_requirements") {{ j.job_requirements }}
         span.location {{ j.job_location }}
         span.time {{ j.job_timings }}
-        span.sal {{ j.job_salary }}
+        span.sal(v-if="j.job_salary") {{ j.job_salary }}
+        span.sal(v-else) Not mentioned
         span.actions
           nav(:ref="`action${j.id}`")
             i(class="fas fa-edit", @click="$emit('select', j, 'edit' )") &nbsp;&nbsp; |  &nbsp;&nbsp;
@@ -43,7 +44,6 @@ export default {
   cursor: pointer
   ul.list
     li
-      width: 100%
       @include stack-l
       border-bottom: 2px solid rgba(#999999, 0.2)
       &:hover
@@ -68,12 +68,12 @@ export default {
       width: 20rem
       padding: $s
     .location, .sal, .time
-      width: 15rem
-      padding: $s
+      width: 10rem
+      padding: $s/2
     .actions
       // justify-content: flex-end
-      width: 10rem
-      padding: $s
+      width: 8rem
+      padding: $s/2
       // margin: 3px
       // visibility: hidden
       // z-index: 2

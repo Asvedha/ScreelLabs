@@ -1,9 +1,11 @@
 <template lang="pug">
   .page
-    .form
-      label Enter UserName / UserMail  
-      input(type="text", v-model="user")
-    button.btn(@click="checkUser()") Login  
+    .form 
+      .f
+        label Enter UserMail  
+        input(type="text", v-model="user", v-on:keyup.enter="checkUser()")
+      br
+      button.btn(@click="checkUser()") Login  
 </template>
 <script>
 export default {
@@ -14,6 +16,7 @@ export default {
   },
   methods: {
     checkUser() {
+      console.log(this.user)
       if (this.user === 'recruiter@screel.in') {
         return this.$router.push('/recruiter')
       } else if (this.user === 'candidate@screel.in') {
@@ -27,5 +30,26 @@ export default {
 </script>
 <style lang="sass" scoped>
 .page
-  @include border(2)
+  flex: 1
+  @include distribute
+  align-items: flex-start
+  padding-top: $s*6
+  margin: auto
+  .form
+    background-color: $neutral-light
+    width: 30rem
+    height: 20rem
+    border: 2px solid grey
+    padding-top: $s*4
+    padding-left: $s*7.5
+    overflow: hidden
+    .f
+      label
+        color: rgba(black, 2)
+      input
+        border: 2px solid black
+    button
+      // padding-top: $s*4
+      padding-left: $s*6
+      padding-right: $s*5.7
 </style>

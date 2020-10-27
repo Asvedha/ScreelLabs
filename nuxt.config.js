@@ -14,10 +14,6 @@ export default {
         href:
           'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css',
       },
-      {
-        rel: 'stylesheet',
-        href: '/path/to/material-icons/iconfont/material-icons.css',
-      },
       { rel: 'stylesheet', href: 'https://use.typekit.net/uvu3cvp.css' },
     ],
   },

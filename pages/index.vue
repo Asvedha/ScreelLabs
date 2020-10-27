@@ -1,8 +1,7 @@
 <template lang="pug">
 .app
   AppHeader(:title="'Applicant Tracking System'")
-  main
-    Index
+  Index
 </template>
 <script>
 import AppHeader from '~/components/AppHeader'
@@ -19,7 +18,7 @@ export default {
   flex: 1
     padding: 0 $s
     margin-bottom: $s*3
-    overflow-y: auto
+    // overflow-y: auto
     // .content-header
     //   @include spread
     //   padding: $s/2

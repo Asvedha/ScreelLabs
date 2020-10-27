@@ -80,7 +80,7 @@ export default {
               job_requirements: job.job_requirements,
               job_timings: job.job_timings,
               job_location: job.job_location,
-              job_salary: job.job_salary,
+              job_salary: parseInt(job.job_salary),
             },
           })
           .then(() => {

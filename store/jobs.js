@@ -100,5 +100,13 @@ const actions = {
         context.commit('resetJobs', job)
       })
   },
+  applyJob(context, job) {
+    console.log(job)
+    return axios
+      .get(`https://main-fastapi.herokuapp.com/jobs/${job.id}/apply`)
+      .then((res) => {
+        console.log(res.data)
+      })
+  },
 }
 export default { state, getters, actions, mutations }
