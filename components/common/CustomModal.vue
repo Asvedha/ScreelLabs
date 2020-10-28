@@ -37,7 +37,6 @@ export default {
   .dialog
     display: none
     @include fixed
-    // z-index: 2000
     height: 40rem
     width: 45rem
     margin: auto
@@ -52,8 +51,6 @@ export default {
       height: 2rem
       width: 2rem
       padding: $s/2
-
-  // dialog contents layout
   .dialog
     display: flex
     flex-direction: column

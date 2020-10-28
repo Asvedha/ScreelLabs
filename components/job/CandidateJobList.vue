@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     applyJob(job) {
-      console.log(job)
+      // console.log(job)
       this.$store.dispatch('jobs/applyJob', job)
     },
   },
@@ -64,7 +64,6 @@ export default {
       list-style-type: none
       background: $neutral-light
       padding: 20px
-      // margin-left: 0px
       margin: 20px
     .title
       font-weight: bold

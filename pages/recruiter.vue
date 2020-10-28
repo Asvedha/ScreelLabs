@@ -51,6 +51,9 @@ export default {
       this.clonedJob = _.clone(this.job)
     },
   },
+  beforeMount() {
+    this.$store.dispatch('jobs/getMain')
+  },
   mounted() {
     this.$store.dispatch('jobs/getJobs')
   },
@@ -61,9 +64,6 @@ export default {
     SelectJob(job, jobAction) {
       this.$store.dispatch('jobs/setJob', job)
       this.$store.dispatch('jobs/setJobAction', jobAction)
-      // if (job && jobAction === 'delete') {
-      //   this.deleteJob(job)
-      // }
     },
     deSelectJob(job, jobAction) {
       this.clonedJob = null
@@ -72,7 +72,6 @@ export default {
     },
     SaveJob(job) {
       if (this.clonedJob.id) {
-        console.log(job)
         this.$store
           .dispatch('jobs/putJob', {
             id: job.id,

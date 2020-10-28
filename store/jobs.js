@@ -47,7 +47,6 @@ const mutations = {
   },
   updateJobs(state, job) {
     if (state.job) {
-      console.log(job.id)
       const i = _.findIndex(state.jobs, { id: job.id })
       Vue.set(state.jobs, i, job)
     }
@@ -65,6 +64,25 @@ const mutations = {
   },
 }
 const actions = {
+  getMain(context) {
+    return axios
+      .get('https://main-fastapi.herokuapp.com/')
+      .then((res) => {
+        const response = res.data
+        const msg = { message: response[0], success: true }
+        context.commit('flashMessage', msg)
+        setTimeout(function () {
+          context.commit('clearMessage')
+        }, 2000)
+      })
+      .catch((e) => {
+        const msg = { message: e, success: false }
+        context.commit('flashMessage', msg)
+        setTimeout(function () {
+          context.commit('clearMessage')
+        }, 2000)
+      })
+  },
   setJob(context, job) {
     context.commit('getJob', job)
   },
@@ -84,7 +102,6 @@ const actions = {
       })
   },
   postJob(context, job) {
-    console.log(job)
     return axios
       .post(`https://main-fastapi.herokuapp.com/jobs/add/`, job)
       .then((res) => {
@@ -149,7 +166,6 @@ const actions = {
       })
   },
   applyJob(context, job) {
-    console.log(job)
     return axios
       .get(`https://main-fastapi.herokuapp.com/jobs/${job.id}/apply`)
       .then((res) => {

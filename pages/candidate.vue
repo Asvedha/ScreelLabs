@@ -14,11 +14,9 @@
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
 import CandidateJobList from '~/components/job/CandidateJobList'
-// import ToastNotification from '~/components/common/ToastNotification'
 export default {
   components: {
     CandidateJobList,
-    // ToastNotification,
   },
   data() {
     return {
@@ -38,6 +36,9 @@ export default {
       return result
     },
   },
+  beforeMount() {
+    this.$store.dispatch('jobs/getMain')
+  },
   mounted() {
     this.$store.dispatch('jobs/getJobs')
   },
@@ -45,7 +46,6 @@ export default {
 </script>
 <style lang="sass" scoped>
 .app
-  // background-color: #f0f0f0
   h3
     text-align: center
   main

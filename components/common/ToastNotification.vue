@@ -1,5 +1,5 @@
 <template lang="pug">
-.toast(:class="{success: success, fail: !success}")
+.toast(:class="{success: success, failed: !success}")
   slot
 </template>
 <script>
@@ -21,7 +21,6 @@ export default {
   max-width: 30rem
   text-align: center
   padding: $s/2 $s
-  // z-index: 5
   border-radius: 3px
   animation-duration: 1s
   animation-fill-mode: both
@@ -30,6 +29,6 @@ export default {
   animation: slideInUp .3s
   &.success
     background-color: green !important
-  &.fail
+  &.failed
     background-color: red !important
 </style>

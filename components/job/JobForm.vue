@@ -1,6 +1,6 @@
 <template lang="pug">
 custom-modal(ref="jobModal", @close="$emit('cancel')")
-  h3(slot="header") {{ jobData && jobData.job_title ? 'Edit Job' : 'New Job'}}
+  h3(slot="header") {{ job && job.job_title ? 'Edit Job' : 'New Job'}}
   .job-form(v-if="jobData")
     .left
       .title
@@ -95,12 +95,10 @@ export default {
     },
   },
   mounted() {
-    // console.log(this.job)
     this.jobData = this.job
   },
   methods: {
     SubmitJob() {
-      console.log(this.jobData)
       this.$emit('submit', this.jobData)
     },
   },

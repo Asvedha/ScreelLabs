@@ -19,7 +19,6 @@ export default {
   },
   methods: {
     checkUser() {
-      console.log(this.user)
       if (this.user === 'recruiter@screel.in') {
         return this.$router.push('/recruiter')
       } else if (this.user === 'candidate@screel.in') {
