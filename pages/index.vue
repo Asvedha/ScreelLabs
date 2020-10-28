@@ -1,6 +1,6 @@
 <template lang="pug">
 .app
-  AppHeader(:title="'Applicant Tracking System'")
+  AppHeader(:title="'jobs@screel.in'")
   LoginForm
 </template>
 <script>
@@ -16,8 +16,4 @@ export default {
   flex: 1
     padding: 0 $s
     margin-bottom: $s*3
-    // overflow-y: auto
-    // .content-header
-    //   @include spread
-    //   padding: $s/2
 </style>

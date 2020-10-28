@@ -1,8 +1,17 @@
 <template lang="pug">
-.toast
+.toast(:class="{success: success, fail: !success}")
   slot
 </template>
-<script></script>
+<script>
+export default {
+  props: {
+    success: {
+      type: Boolean,
+      default: null,
+    },
+  },
+}
+</script>
 <style lang="sass" scoped>
 .toast
   @include fixed-bottom-right(2rem)
@@ -19,4 +28,8 @@
   -webkit-animation-duration: 1s
   -webkit-animation-fill-mode: both
   animation: slideInUp .3s
+  &.success
+    background-color: green !important
+  &.fail
+    background-color: red !important
 </style>

@@ -1,14 +1,17 @@
 <template lang="pug">
 .candidate
-  AppHeader(:title="'Find Jobs'")
+  AppHeader(:title="'Apply Jobs'")
     .actions(slot="actions")
+      span.i.fas.fa-search  &nbsp;
+      input(type="text", v-model="search", placeholder="Search Jobs.." :style="{ 'border': '2px solid black !important' }")
       nuxt-link.btn(to="/") Logout
   main
-    CandidateJobList
-    ToastNotification(v-if="message && message !== ''")
+    CandidateJobList(:filteredList="searchFilter")
+    ToastNotification(v-if="message && message !== ''", :success="success")
       |  {{ message }}
 </template>
 <script>
+import _ from 'lodash'
 import { mapGetters } from 'vuex'
 import CandidateJobList from '~/components/job/CandidateJobList'
 // import ToastNotification from '~/components/common/ToastNotification'
@@ -17,11 +20,23 @@ export default {
     CandidateJobList,
     // ToastNotification,
   },
+  data() {
+    return {
+      search: '',
+    }
+  },
   computed: {
     ...mapGetters({
       jobs: 'jobs/jobs',
       message: 'jobs/message',
+      success: 'jobs/success',
     }),
+    searchFilter() {
+      const result = _.filter(this.jobs, (job) => {
+        return job.job_title.toLowerCase().includes(this.search.toLowerCase())
+      })
+      return result
+    },
   },
   mounted() {
     this.$store.dispatch('jobs/getJobs')

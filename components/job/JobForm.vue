@@ -8,14 +8,20 @@ custom-modal(ref="jobModal", @close="$emit('cancel')")
         input(type="text", v-model="jobData.job_title")
       .desc
         label Job Description
-        textarea(v-model="jobData.job_description")
-      .requirement
+        textarea(v-model="jobData.job_description", maxLength=128)
+        .error(v-if="maxlengthDesc") 
+          | max length reached
+      .req
         label Job Requirement
-        textarea(v-model="jobData.job_requirements")
+        textarea(v-model="jobData.job_requirements", maxLength=128)
+        .error(v-if="maxlengthReq") 
+          | max length reached
     .right    
-      .location  
+      .loc
         label Location
-        input(type="text", v-model="jobData.job_location")
+        textarea(type="text", v-model="jobData.job_location", maxLength=128)
+        .error(v-if="maxlengthLoc") 
+          | max length reached
       .time 
         label Timings
         input(type="text", v-model="jobData.job_timings")
@@ -26,6 +32,11 @@ custom-modal(ref="jobModal", @close="$emit('cancel')")
     button.btn(@click="SubmitJob", v-on:keyup.enter="SubmitJob") Save    
 </template>
 <script>
+import Vue from 'vue'
+import Vuelidate from 'vuelidate'
+import { maxLength } from 'vuelidate/lib/validators'
+
+Vue.use(Vuelidate)
 export default {
   props: {
     job: {
@@ -35,8 +46,46 @@ export default {
   },
   data() {
     return {
-      jobData: null,
+      jobData: {
+        job_title: '',
+        job_description: '',
+        job_requirements: '',
+        job_location: '',
+        job_salary: null,
+        job_timings: '',
+      },
+      maxlength: 128,
     }
+  },
+  validations: {
+    jobData: {
+      description: {
+        maxLength: maxLength(128),
+      },
+      requirements: {
+        maxLength: maxLength(128),
+      },
+      location: {
+        maxLength: maxLength(128),
+      },
+    },
+  },
+  computed: {
+    maxlengthDesc() {
+      if (this.jobData.job_description.length === this.maxlength) {
+        return true
+      } else return false
+    },
+    maxlengthLoc() {
+      if (this.jobData.job_location.length === this.maxlength) {
+        return true
+      } else return false
+    },
+    maxlengthReq() {
+      if (this.jobData.job_requirements.length === this.maxlength) {
+        return true
+      } else return false
+    },
   },
   watch: {
     jobData() {

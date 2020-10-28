@@ -1,25 +1,29 @@
 <template lang="pug">
-.candidate-list(class="clearfix")
-  ul.lists(v-if="jobs.length > 0")
-    li(v-for="job, i in jobs")
+.candidate-list(v-if="filteredList")
+  ul.lists(v-if="filteredList.length > 0")
+    li(v-for="job, i in filteredList")
       span.title {{ job.job_title }}
       h4 Description: &nbsp;
         span.description {{ job.job_description }}
+        span(v-if="!job.job_description")  Not mentioned
       h4 Requirements: &nbsp;  
         span.requirements {{ job.job_requirements }}
+        span(v-if="!job.job_requirements")  Not mentioned
       br  
       h3
         i(class="fas fa-coins") &nbsp;
         span salary: &nbsp;
-        span.salary {{ job.job_salary }}
-        span.salary(v-if="!job.job_salary")  Not mentioned
+        span.salary &#x20B9; {{ job.job_salary }}
+        span(v-if="!job.job_salary")  Not mentioned
       br  
       span.location
         i(class="fas fa-map-marker-alt") &nbsp;
-        span {{ job.job_location }} | &nbsp;
+        span {{ job.job_location }} &nbsp;  
+        span(v-if="!job.job_location") Not mentioned &nbsp;
       span.timing 
         i(class="fas fa-business-time") &nbsp;
         span {{ job.job_timings }}
+         span(v-if="!job.job_timings") Not mentioned &nbsp;
       .actions  
         button.btn(@click="applyJob(job)") Apply
   ul.lists(v-else)
@@ -28,6 +32,12 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  props: {
+    filteredList: {
+      type: Array,
+      default: () => [],
+    },
+  },
   computed: {
     ...mapGetters({
       jobs: 'jobs/jobs',

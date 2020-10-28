@@ -1,8 +1,8 @@
 <template lang="pug">
 .recruiter
-  AppHeader(:title="'Jobs Listing'")
+  AppHeader(:title="'Jobs List'")
     .actions(slot="actions") 
-      button.btn(@click="CreateJob()") + Add Job
+      button.btn(@click="CreateJob()", :title="'Create Job'") + Add Job
       nuxt-link.btn(to="/") Logout
   section    
     .container
@@ -10,7 +10,7 @@
         main    
           RecruiterJobList(@select="SelectJob", @delete="deleteJob")
           JobForm(v-if="clonedJob && jobAction === 'edit'", :job="clonedJob", @submit="SaveJob", @cancel="deSelectJob")
-          ToastNotification(v-if="message && message !== ''")
+          ToastNotification(v-if="message && message !== ''", :success="success")
             |  {{ message }}
 </template>
 <script>
@@ -43,6 +43,7 @@ export default {
       job: 'jobs/job',
       jobAction: 'jobs/jobAction',
       message: 'jobs/message',
+      success: 'jobs/success',
     }),
   },
   watch: {

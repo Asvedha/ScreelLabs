@@ -12,16 +12,20 @@
       li(v-for="j, i in jobs", :key="j.id")
         span.title
           strong {{ j.job_title }}
-        span.desc(:title="j.job_description") {{ j.job_description }}
-        span.req(:title="j.job_requirements") {{ j.job_requirements }}
-        span.location {{ j.job_location }}
-        span.time {{ j.job_timings }}
-        span.sal(v-if="j.job_salary") {{ j.job_salary }}
+        span.desc(v-if="j.job_description", :title="j.job_description") {{ j.job_description }}
+        span.desc(v-else) Not mentioned
+        span.req(v-if="j.job_requirements", :title="j.job_requirements") {{ j.job_requirements }}
+        span.req(v-else) Not mentioned
+        span.location(v-if="j.job_location") {{ j.job_location }}
+        span.location(v-else) Not mentioned
+        span.time(v-if="j.job_timings") {{ j.job_timings }}
+        span.time(v-else) Not mentioned
+        span.sal(v-if="j.job_salary") &#x20B9; {{ j.job_salary }}
         span.sal(v-else) Not mentioned
         span.actions
           nav(:ref="`action${j.id}`")
-            i(class="fas fa-edit", @click="$emit('select', j, 'edit' )") &nbsp;&nbsp; |  &nbsp;&nbsp;
-            i(class="fas fa-trash-alt", @click="$emit('delete', j)")
+            i(class="fas fa-edit", @click="$emit('select', j, 'edit' )", :title="'Update Job'") &nbsp;&nbsp; |  &nbsp;&nbsp;
+            i(class="fas fa-trash-alt", @click="$emit('delete', j)", :title="'Delete Job'")
     ul.list(v-else)
       li
         span.title No Jobs found!
@@ -59,39 +63,20 @@ export default {
   ul.list, ul.header
     .title
       width: 15rem
-      padding: $s
-    .title, .desc, .req
-      white-space: nowrap
+      padding: $s/2
+    .title, .desc, .req, .location
+      // white-space: nowrap
       overflow: hidden
       text-overflow: ellipsis
-    .desc, .req,
-      width: 20rem
-      padding: $s
-    .location, .sal, .time
-      width: 10rem
+    .desc, .req, .location,
+      width: 18rem
       padding: $s/2
-    .actions
-      // justify-content: flex-end
+    .sal, .time,
       width: 8rem
       padding: $s/2
-      // margin: 3px
-      // visibility: hidden
-      // z-index: 2
-    // .title
-    //   width: 15rem
-    //   padding: $s
-    //   overflow: hidden
-    //   text-overflow: ellipsis
-    // .desc, .req,
-    //   width: 18rem
-    //   padding: $s
-    //   white-space: nowrap
-    //   overflow: hidden
-    //   text-overflow: ellipsis
-    // .location, .time, .salary
-    //   width: 15rem
-    //   padding: $s
-    // .actions
-    //   width: 10rem
-    //   padding: $s/2
+    .actions
+      justify-content: flex-end
+      width: 8rem
+      padding: $s/2
+      margin: 10px
 </style>

@@ -2,16 +2,19 @@
   .page
     .form 
       .f
-        label Enter UserMail  
+        label Enter User Mail  
         input(type="text", v-model="user", v-on:keyup.enter="checkUser()")
       br
-      button.btn(@click="checkUser()") Login  
+      button.btn(@click="checkUser()") Login
+    ToastNotification(v-if="message && message != ''", :success="success") {{ message }}  
 </template>
 <script>
 export default {
   data() {
     return {
       user: '',
+      message: '',
+      success: null,
     }
   },
   methods: {
@@ -22,7 +25,12 @@ export default {
       } else if (this.user === 'candidate@screel.in') {
         return this.$router.push('/candidate')
       } else {
+        this.message = 'Login Failed !'
+        this.success = false
         this.$router.push('/')
+        setTimeout(() => {
+          this.message = ''
+        }, 2000)
       }
     },
   },
@@ -45,9 +53,9 @@ export default {
     overflow: hidden
     .f
       label
-        color: rgba(black, 2)
+        color: black !important
       input
-        border: 2px solid black
+        border: 2px solid black !important
     button
       // padding-top: $s*4
       padding-left: $s*6
